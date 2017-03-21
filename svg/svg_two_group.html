@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="d"></div>
+<script src="js/two_new.js"></script>
+<script>
+    var elem = document.getElementById('d');
+    var two = new Two({ width: 885, height: 500 }).appendTo(elem);
+
+    var circle = two.makeCircle(100, 100, 50);
+    var rect = two.makeRectangle(250, 100, 100, 50);
+    var star = new Two.Star(450, 150, 100, 50, 5);
+    var roundedRect = new Two.RoundedRectangle(670, 100, 100, 50, 10);
+    var polygon = new Two.Polygon(650, 300, 100, 10);
+    var ellipse = new Two.Ellipse(300, 300, 200, 100);
+//    circle.fill = '#FF8000';
+//    circle.stroke = 'orangered';
+//    rect.fill = 'rgba(0, 200, 255, 0.75)';
+//    rect.stroke = '#1C75BC';
+
+    // Groups can take an array of shapes and/or groups.
+    var group = two.makeGroup(circle, rect,star,roundedRect,polygon,ellipse);
+    group.fill = '#FF8000';
+    group.stroke = '#1C75BC';
+
+    // And have translation, rotation, scale like all shapes.
+    //group.translation.set(two.width / 2, two.height / 2);
+    //group.rotation = Math.PI;
+    //group.scale = 0.75;
+
+    // You can also set the same properties a shape have.
+    group.linewidth = 7;
+    group.scale = 0;
+    two.frameCount = 10;
+    //group.translation.set(two.width/2,two.height/2);
+    two.bind('update',function(frameCount){
+        if(group.scale>0.99999){
+            group.scale = 0;
+        }
+
+        group.scale += 0.01;
+        //group.rotation = Math.PI*2;
+        //frameCount=0;
+        console.log(frameCount);
+    }).play();
+
+    two.update();
+</script>
+</body>
+</html>

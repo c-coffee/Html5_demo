@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="600"></canvas>
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var mx,my;
+
+    canvas.onmousemove = function(e){
+        var x = e.clientX;
+        var y = e.clientY;
+        mx = mx?mx:x;
+        my = my?my:y;
+
+        ctx.beginPath();
+        ctx.moveTo(mx,my);
+        ctx.lineTo(x,y);
+        ctx.closePath();
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "black";
+        console.log(x,y,mx,my);
+        ctx.strokeWidth = 120;
+        ctx.lineWidth = 10;
+        ctx.stroke();
+        mx = x;
+        my = y;
+    }
+</script>
+</body>
+</html>

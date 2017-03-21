@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="d"></div>
+<script src="js/two_new.js"></script>
+<script>
+    //获取容器 （一般定义为div，不使用svg或canvas）
+    var d = document.getElementById("d");
+    //设置画布参数（svg 或者 cavans 大小）
+    var params = {width:285,height:200,type:Two.Types.canvas};
+    //创建画布
+    var two = new Two(params);
+    //将画布附加到dom元素上
+    two.appendTo(d);
+    //设置图形（圆形）
+    var circle = two.makeCircle(100,100,50);
+    //填充颜色
+    circle.fill='#FF8000';
+    //边框色
+    circle.stroke="orange";
+
+    //绘制方形
+    var rect = two.makeRectangle(213, 100, 100, 100);
+    //填充颜色
+    rect.fill = 'rgb(0, 200, 255)';
+    //设置透明度
+    rect.opacity = 0.75;
+    //不绘制边框
+    rect.noStroke();
+
+    //页面更新，得到绘制效果
+    two.update();
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #d svg{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="d"></div>
+<script src="js/two.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+    var elem = document.getElementById('d');
+    var two = new Two({ width: 800, height: 600,fullscreen:true,type:Two.Types.canvas }).appendTo(elem);
+    var mx,my;
+    $('#d svg').on("mousemove",function(e){
+        var x = e.clientX;
+        var y = e.clientY;
+        mx = mx?mx:x;
+        my = my?my:y;
+
+        //var circle = two.makeCircle(x,y,20);
+        var line = two.makeLine(mx,my,x,y);
+//        circle.fill = '#FF8000';
+//        circle.noStroke();
+        two.update();
+        mx = x;
+        my = y;
+    })
+
+</script>
+</body>
+</html>
