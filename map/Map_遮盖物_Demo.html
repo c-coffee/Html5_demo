@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GiyLO3zehgPymu283UBOWtuDwhjTEHea"></script>
+</head>
+<body>
+<div id="allMap" style="width:500px;height:500px;"></div>
+<script>
+    var map = new BMap.Map("allMap");
+    var point = new BMap.Point(116.404,39.915);
+    map.centerAndZoom("长沙", 15);
+    /*
+     Map对象
+     addOverlay(overlay:Overlay)	返回值 none	将覆盖物添加到地图中，一个覆盖物实例只能向地图中添加一次。
+
+     Marker(point:Point[, opts:MarkerOptions])	创建一个图像标注实例。point参数指定了图像标注所在的地理位置。
+
+     Point(lng:Number, lat:Number)	以指定的经度和纬度创建一个地理点坐标。
+     //如何获取位置的经度和纬度值？
+     */
+
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GiyLO3zehgPymu283UBOWtuDwhjTEHea"></script>
+</head>
+<body>
+<div id="allMap" style="width:500px;height:500px;"></div>
+<script>
+    var map = new BMap.Map("allMap");
+    map.centerAndZoom("长沙",12);
+
+    /*
+        //为百度地图添加控件
+        ScaleControl 类
+        构造器  ScaleControl([opts:ScaleControlOptions])	创建一个比例尺控件。
+
+     opts:ScaleControlOptions
+
+     属性	类型	描述
+     anchor	enum ControlAnchor	控件的停靠位置。
+     offset	Size	控件的偏移值。  new BMap.Size(20,20)
+
+     Size
+     new BMap.Size(20,20)
+
+     anchor
+     常量	描述
+     BMAP_ANCHOR_TOP_LEFT	控件将定位到地图的左上角。
+     BMAP_ANCHOR_TOP_RIGHT	控件将定位到地图的右上角。
+     BMAP_ANCHOR_BOTTOM_LEFT	控件将定位到地图的左下角。
+     BMAP_ANCHOR_BOTTOM_RIGHT	控件将定位到地图的右下角。
+    */
+    var scale = new BMap.ScaleControl({anchor:BMAP_ANCHOR_TOP_RIGHT,offset:new BMap.Size(10,10)});
+
+    /*
+     NavigationControl([type:NavigationControlOptions])	创建一个特定样式的地图平移缩放控件。
+     NavigationControlOptions
+     anchor	enum ControlAnchor	控件的停靠位置。
+     offset	Size	控件的水平偏移值。
+     type	enum NavigationControlType	平移缩放控件的类型。
+     showZoomInfo	Boolean	是否显示级别提示信息。(自 1.1 新增)
+     enableGeolocation	Boolean	控件是否集成定位功能，默认为false。(自 2.0 新增)
+     */
+    var leftNav =new BMap.NavigationControl();
+    var rightNav =new BMap.NavigationControl({offset:new BMap.Size(30,100),anchor:BMAP_ANCHOR_BOTTOM_RIGHT,type:BMAP_NAVIGATION_CONTROL_ZOOM,enableGeolocation:true});
+    map.addControl(scale);  //添加位置默认为左下角
+    map.addControl(leftNav);
+    map.addControl(rightNav);
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GiyLO3zehgPymu283UBOWtuDwhjTEHea"></script>
+</head>
+<body>
+<div id="allMap" style="width:600px;height:400px;"></div>
+
+<script>
+    var map = new BMap.Map("allMap");
+    var myGeo = new BMap.Geocoder();
+    var mark;
+    var content = "<table><tr>            <th colspan='3'>湖南省畜牧水产局</th>            </tr>            <tr>            <td style='width:100px;'>地址</td>            <td style='width:200px;'>湖南省畜牧水产局</td>            <td rowspan='3'><img id='myImg' src='data/1.jpg'></td>            </tr>            <tr>            <td>电话</td>            <td>0731-88881313</td>            </tr>            <tr>            <td>联系人</td>            <td>江女士,周女士</td>    </tr>    </table>";
+    // 将地址解析结果显示在地图上,并调整地图视野
+    myGeo.getPoint("湖南省畜牧水产局", function(point){
+        if (point) {
+            map.centerAndZoom(point, 18);
+            mark = new BMap.Marker(point);
+            map.addOverlay(mark);
+            var opts = {
+                width:400,
+                height:150,
+            };
+
+            var info = new BMap.InfoWindow(content,opts);
+            mark.addEventListener("click",function(){
+                map.openInfoWindow(info,point);
+            })
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+    }, "长沙");
+
+    //map.centerAndZoom("长沙");
+</script>
+</body>
+</html>
