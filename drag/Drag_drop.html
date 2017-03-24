@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #d1{
+            width:300px;
+            height:300px;
+            border:solid 1px black;
+            float:left;
+        }
+        #d2{
+            width:300px;
+            height:300px;
+            border:solid 1px black;
+            float:right;
+        }
+    </style>
+</head>
+<body>
+<!--d1用于显示源元素-->
+<div id="d1">
+    <img id="myImg1" src="data/1.jpg">
+    <img id="myImg2" src="data/2.gif">
+    <img id="myImg3" src="data/3.png">
+    <img id="myImg4" src="data/4.jpg">
+</div>
+<!--d2用于显示目标元素-->
+<div id="d2"></div>
+<script>
+    /*
+     HTML页面默认不允许实现拖放功能。
+     页面中图片是源元素
+     */
+    //1.获取源元素
+    var myImg = document.getElementById("myImg");
+    var d1 = document.getElementById("d1");
+    var d2 = document.getElementById("d2");
+    d1.addEventListener("dragstart",myDragStart);
+    d2.addEventListener("dragenter",myDragEnter);
+    d2.addEventListener("dragover",myDragOver);
+    d2.addEventListener("dragleave",myDragLeave);
+    d2.addEventListener("drop",myDrop);
+
+    function myDragStart(event){
+        var mydata = event.target.id;
+        //console.log(event.target.toString());
+        //console.log(mydata.toString());
+        var trans = event.dataTransfer;
+        trans.setData("myid",mydata);
+
+    };
+    function myDragEnter(){
+       // console.log("大爷，您来了..");
+    };
+    function myDragOver(){
+        event.preventDefault();
+        //console.log("大爷，你来啦啦啦啦啦啦啦...");
+    };
+    function myDragLeave(){
+        //console.log("大爷，您走好！");
+    };
+    function myDrop(event){
+        var trans = event.dataTransfer;
+        var mysrc = trans.getData("myid")
+        //console.log(JSON.parse(mysrc));
+        //d2.innerHTML= mysrc.toString();
+        console.log(mysrc);
+        var myObj = document.getElementById(mysrc);
+        myObj.parentNode.removeChild(myObj);
+        event.target.appendChild(myObj);
+
+    };
+</script>
+</body>
+</html>

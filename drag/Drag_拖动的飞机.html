@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖动的飞机</title>
+    <style>
+        body{
+            position:relative;
+        }
+        #imgPlane{
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+<h1>拖动的飞机</h1>
+<hr>
+<img id="imgPlane" src="img/p3.png" draggable="true">
+<script>
+    var plane = document.getElementById("imgPlane");
+    var offsetX,offsetY;
+    plane.addEventListener("dragstart",function(e){
+        offsetX = e.offsetX;    //获取鼠标偏移值
+        offsetY = e.offsetY;    //获取鼠标偏移值
+        console.log("开始拖拽",e);
+    });
+    plane.addEventListener("drag",function(e){
+        var x = e.clientX;  //获取鼠标当前坐标
+        var y = e.clientY;  //获取鼠标当前坐标
+
+        if( x==0 && y==0 ){
+            return;
+        }
+
+        x -= offsetX;   //调整偏移值
+        y -= offsetY;   //调整偏移值
+
+        plane.style.left = x + "px";    //设置最终坐标
+        plane.style.top = y + "px";     //设置最终坐标
+
+        console.log("飞机拖拽中....",e);
+    });
+    plane.addEventListener("dragend",function(e){
+        console.log("结束拖拽",e)
+    });
+</script>
+</body>
+</html>

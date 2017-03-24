@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align:center;
+        }
+        #dustbin{
+            opacity:.3;
+        }
+    </style>
+</head>
+<body>
+<h1>拖动飞机至回收站</h1>
+<hr>
+<img id="dustbin" src="img/dustbin.png">
+<hr>
+<img id="p1" class="plane" src="img/p3.png">
+<img id="p2" class="plane" src="img/p4.png">
+<img id="p3" class="plane" src="img/p5.png">
+<script>
+    var planes = document.getElementsByClassName("plane");
+    for(var i=0; i<planes.length; i++){
+        planes[i].addEventListener("dragstart",function(e){  //绑定事件
+            e.dataTransfer.setData("PlaneID",this.id);  //保存当前操作对象id
+        })
+    }
+
+    var dustbin = document.getElementById("dustbin");
+    dustbin.addEventListener("dragenter",function(e){
+        console.log("拖动进入");
+        dustbin.style.opacity = 1;  //设置垃圾箱透明度效果
+    });
+    dustbin.addEventListener("dragover",function(e){
+        console.log("拖动至目标内");
+        e.preventDefault(); //阻止默认操作，实现可拖拽
+    });
+    dustbin.addEventListener("drop",function(e){
+        console.log("松开拖动");
+        dustbin.style.opacity = .3;
+        var planeId = e.dataTransfer.getData("PlaneID");    //获取当前拖拽对象
+        var p = document.getElementById(planeId);
+        p.parentNode.removeChild(p);    //从DOM树移除对象
+    });
+    dustbin.addEventListener("dragleave",function(e){
+        console.log("拖动离开");
+        dustbin.style.opacity = .3;
+    });
+</script>
+</body>
+</html>

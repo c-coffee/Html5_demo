@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #d1{
+            width:300px;
+            height:300px;
+            border:solid 1px black;
+        }
+        #d2{
+            width:300px;
+            height:300px;
+            border:solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <!--d1用于显示源元素-->
+    <div id="d1">
+        <img id="myImg" src="data/1.jpg">
+    </div>
+    <!--d2用于显示测试结果-->
+    <div id="d2"></div>
+<script>
+    /*
+    HTML页面默认不允许实现拖放功能。
+    页面中图片是源元素
+     */
+    //1.获取源元素
+    var myImg = document.getElementById("myImg");
+    var d2 = document.getElementById("d2");
+    //2.为源元素绑定源元素事件。
+    myImg.addEventListener("dragstart",myDragStart);
+    myImg.addEventListener("drag",myDrag);
+    myImg.addEventListener("dragend",myDragEnd);
+    //3.定义事件对应的处理函数
+    function myDragStart(){
+        d2.innerHTML += "图片开始被拖放<br>";
+    }
+    function myDrag(){
+        /*
+        x轴  pageX/clientX/offsetX/x
+        y轴  pageY/clientY/offsetY/y
+         */
+        d2.innerHTML += "图片正在被拖放<br>";
+    }
+    function myDragEnd(){
+        d2.innerHTML += "图片结束拖放<br>";
+    }
+</script>
+</body>
+</html>
